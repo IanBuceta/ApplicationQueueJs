@@ -4,7 +4,7 @@ const container = document.createElement('div');
 container.setAttribute('class', 'container');
 app.appendChild(container);
 
-var request = new requestMaker(baseURL);
+/*var request = new requestMaker(baseURL);
 request.addEventListener("load",  function(){
     var data = JSON.parse(this.response);
 
@@ -34,6 +34,6 @@ request.addEventListener("load",  function(){
 });
 
 
-
+*/
 //request.open("GET",baseURL+ "/api/StudentProgram", true);
 
