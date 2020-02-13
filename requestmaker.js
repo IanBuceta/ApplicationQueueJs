@@ -9,7 +9,8 @@ function requestMaker(baseURL){
 
     this.postStudentProgram = function(studentProgram) {
         request.open("POST", baseURL + "/api/StudentProgram", true)
-        request.send(JSON.stringify())
+        var data = JSON.stringify({"id": studentProgram.id , "teamName": studentProgram.teamName, "src" : studentProgram.src, "isRunning" : studentProgram.isRunning});
+        request.send(data);
     };
 
     this.patchStudentProgram = function(id, studentProgram) {
@@ -19,7 +20,7 @@ function requestMaker(baseURL){
         request.onreadystatechange = function () {
             if (request.readyState === 4 && request.status === 200) {
                 var json = JSON.parse(request.responseText);
-                console.log();
+                console.log(json);
             }
         };
         var data = JSON.stringify({"id": studentProgram.id , "teamName": studentProgram.teamName, "src" : studentProgram.src, "isRunning" : studentProgram.isRunning});
