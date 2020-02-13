@@ -1,31 +1,17 @@
 const app = document.getElementById('root');
-
+const baseURL="http://localhost:65072";
 const container = document.createElement('div');
 container.setAttribute('class', 'container');
 app.appendChild(container);
 
-var request = new XMLHttpRequest();
-
-request.open("GET", "https://localhost:44337/api/StudentProgram/", true);
-alert(request.status);
-
-try
-{
-    request.send(null);
-}
-catch(error)
-{
-    alert(error)
-}
-
-
-request.onload = function(){
+var request = new requestMaker(baseURL);
+request.addEventListener("load",  function(){
     var data = JSON.parse(this.response);
 
     // Checks for status errors
-    if(request.status >= 200  && response.status < 400){ 
+    if(request.status >= 200  && request.status < 300){ 
     
-        data.array.forEach(element => {
+        data.forEach(element => {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
 
@@ -45,8 +31,9 @@ request.onload = function(){
         error.textContent = 'Something went wrong! Status code:' + request.status;
         app.appendChild(errorMsg);
     }
-}
+});
 
 
 
+//request.open("GET",baseURL+ "/api/StudentProgram", true);
 
