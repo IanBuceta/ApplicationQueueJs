@@ -40,8 +40,5 @@ function requestMaker(baseURL){
         request.open("DELETE", baseURL + "/api/StudentProgram/Select", true);
         request.send(null);
     };
-    result.test = function(){
-        console.log("I'm stuff");
-    }
     return result;
 }
