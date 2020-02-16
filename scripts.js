@@ -10,8 +10,8 @@ function controller(baseURL){
     let result = {};
     
     result.getStudentPrograms = function(){
-        let stuff = request.getStudentPrograms()
-        let data = JSON.parse(stuff);
+        let data = request.getStudentPrograms();
+        
         data.forEach(element => {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
@@ -53,7 +53,7 @@ function controller(baseURL){
 }
 
 let application = controller("http://localhost:65072");
-application.addEventListener("load", application.getStudentPrograms());
+application.getStudentPrograms();
 //application.addEventListener("",)
 
 //request.open("GET",baseURL+ "/api/StudentProgram", true);
