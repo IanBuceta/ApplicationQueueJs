@@ -1,16 +1,17 @@
-const app = document.getElementById('root');
-const baseURL="http://localhost:65072";
-const container = document.createElement('div');
-container.setAttribute('class', 'container');
-app.appendChild(container);
-
-/*var request = new requestMaker(baseURL);
-request.addEventListener("load",  function(){
-    var data = JSON.parse(this.response);
-
-    // Checks for status errors
-    if(request.status >= 200  && request.status < 300){ 
+function controller(baseURL){
+    const app = document.getElementById('root');
+    const container = document.createElement('div');
+    container.setAttribute('class', 'container');
+    app.appendChild(container);
     
+    const _baseURL = baseURL;
+    let request = requestMaker(baseURL);
+    
+    let result = {};
+    
+    result.getStudentPrograms = function(){
+        let stuff = request.getStudentPrograms()
+        let data = JSON.parse(stuff);
         data.forEach(element => {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
@@ -23,17 +24,37 @@ request.addEventListener("load",  function(){
             
             container.appendChild(card);
             card.appendChild(h1);
-            card.appendChild(p);            
+            card.appendChild(p);
         });
-    }
-    else{
-        const errorMsg = document.createElement('marquee');
-        error.textContent = 'Something went wrong! Status code:' + request.status;
-        app.appendChild(errorMsg);
-    }
-});
 
+    }
+    
+    result.postStudentProgram = function(studentProgram){
+        request.postStudentProgram(studentProgram);
+        result.getStudentPrograms();
+    }
 
-*/
+    result.patchStudentProgram = function(id, studentProgram){
+        request.patchStudentProgram(id, studentProgram);
+        result.getStudentPrograms();
+
+    }
+
+    result.deleteStudentProgram = function(){
+        request.deleteStudentProgram();
+        result.getStudentPrograms();
+    }
+
+    result.selectTopProgram = function(){
+        request.selectTopProgram();
+        result.getStudentPrograms();
+    }
+    return result;
+}
+
+let application = controller("http://localhost:65072");
+application.addEventListener("load", application.getStudentPrograms());
+//application.addEventListener("",)
+
 //request.open("GET",baseURL+ "/api/StudentProgram", true);
 
