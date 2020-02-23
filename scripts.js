@@ -55,7 +55,7 @@ function controller(baseURL){
     
     result.postStudentProgram = function(studentProgram){
         let data = request.postStudentProgram(studentProgram);
-        //data.then((element) => {result.getStudentPrograms()});
+        data.then((element) => {result.getStudentPrograms()});
     };
 
     result.patchStudentProgram = function(id, studentProgram){        
@@ -76,11 +76,11 @@ function controller(baseURL){
 }
 
 let application = controller("http://localhost:65072");
-application.getStudentPrograms();
-application.postStudentProgram(studentProgram(18,"equipoDeGente", "anda a buscarlo", false));
-/*application.getStudentProgram(1);
-application.deleteStudentProgram();
-application.patchStudentProgram(3, studentProgram(3,"MODIFICADO", "anda a buscarlo", false));*/
+//application.getStudentPrograms();
+//application.postStudentProgram(studentProgram(18,"equipoDeGente", "anda a buscarlo", false));
+//application.getStudentProgram(1);
+//application.deleteStudentProgram();
+//application.patchStudentProgram(3, studentProgram(3,"MODIFICADO", "anda a buscarlo", false));
 
 function studentProgram(id, teamName, src, isRunning){
     let result = {};
