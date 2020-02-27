@@ -1,8 +1,11 @@
 function controller(baseURL){
     const app = document.getElementById('root');
     const container = document.createElement('div');
-    container.setAttribute('class', 'container');
+    container.setAttribute('class', 'card-container container-fluid');
+    let row = document.createElement('div');
+    row.className = "row no-gutters";
     app.appendChild(container);
+    container.appendChild(row);
     
     const _baseURL = baseURL;
     let request = requestMaker(baseURL);
@@ -11,19 +14,56 @@ function controller(baseURL){
     
     result.getStudentPrograms = function(){
         let data = request.getStudentPrograms();
+        let i = 0;
         data.then((res)=>{
             res.forEach(element => {
+                const column = document.createElement('div');
+                column.className = "col col-sm-3 mb-3";
                 const card = document.createElement('div');
-                card.setAttribute('class', 'card');    
-                const h1 = document.createElement('h1');
-                h1.textContent = element.teamName;
+                card.setAttribute('class', 'card'); 
+
+                const body = document.createElement('body');
+                body.className = "card-body";
+
+                const h5 = document.createElement('h1');
+                h5.textContent = element.teamName;
+                h5.className = "card-title";
     
                 const p = document.createElement('p');
                 p.textContent = element.src;
+                p.className = "card-text";
                 
-                container.appendChild(card);
-                card.appendChild(h1);
+                const buttonGroup = document.createElement('div');
+                buttonGroup.className = 'btn-group';
+                const buttonEdit = document.createElement('a');
+                buttonEdit.className = "btn btn-primary";
+                buttonEdit.textContent = "Edit";
+
+                const buttonInfo = document.createElement('a');
+                buttonInfo.className = "btn btn-secondary";
+                buttonInfo.textContent = "More Info";
+                
+                const buttonDelete = document.createElement('a');
+                buttonDelete.className = "btn btn-danger";
+                buttonDelete.textContent = "Delete";
+
+                row.appendChild(column);
+                column.appendChild(card)
+                card.appendChild(body);
+                card.appendChild(h5);
                 card.appendChild(p);
+                
+                card.appendChild(buttonGroup);
+                buttonGroup.appendChild(buttonEdit);
+                buttonGroup.appendChild(buttonInfo);
+                buttonGroup.appendChild(buttonDelete);
+                i++;
+                if(i == 4){
+                    const w = document.createElement('div');
+                    w.className = "w-100";
+                    row.appendChild(w);
+                    i = 0;
+                }                
             });
         });
     };
@@ -76,7 +116,7 @@ function controller(baseURL){
 }
 
 let application = controller("http://localhost:65072");
-//application.getStudentPrograms();
+application.getStudentPrograms();
 //application.postStudentProgram(studentProgram(18,"equipoDeGente", "anda a buscarlo", false));
 //application.getStudentProgram(1);
 //application.deleteStudentProgram();
