@@ -25,8 +25,6 @@ function requestMaker(baseURL){
         });
     }
 
-    function log(data) { console.log(data); }
-
     result.postStudentProgram = function(studentProgram) {
         return new Promise((resolve,reject)=>{
             let request = new XMLHttpRequest();
