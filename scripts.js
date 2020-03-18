@@ -38,14 +38,24 @@ function controller(baseURL){
                 const buttonEdit = document.createElement('a');
                 buttonEdit.className = "btn btn-primary";
                 buttonEdit.textContent = "Edit";
-
+                
+                var queryString = "?id=" + element.id;
+                buttonEdit.addEventListener("click", function () {                 
+                    window.location.href = "edit.html" + queryString;
+                });
                 const buttonInfo = document.createElement('a');
                 buttonInfo.className = "btn btn-secondary";
-                buttonInfo.textContent = "More Info";
+                buttonInfo.textContent = "Details";
+                buttonInfo.addEventListener("click", function () {
+                    window.location.href = "details.html" + queryString;
+                });
                 
                 const buttonDelete = document.createElement('a');
                 buttonDelete.className = "btn btn-danger";
                 buttonDelete.textContent = "Delete";
+                buttonDelete.addEventListener("click", () => {
+                    result.deleteStudentProgram(element.id);
+                });
 
                 row.appendChild(column);
                 column.appendChild(card)
@@ -80,9 +90,9 @@ function controller(baseURL){
                 const p = document.createElement('p');
                 p.textContent = element.id;
                 const p2 = document.createElement('p');
-                p.textContent = element.isRunning;
+                p2.textContent = element.isRunning;
                 const p3 = document.createElement('p');
-                p.textContent = element.src;
+                p3.textContent = element.src;
                 
                 
                 container.appendChild(card);
@@ -100,12 +110,12 @@ function controller(baseURL){
 
     result.patchStudentProgram = function(id, studentProgram){        
         let data = request.patchStudentProgram(id, studentProgram);
-        data.then((element) => {result.getStudentPrograms()});
+        data.then((element) => {window.location.reload()});
     };
 
     result.deleteStudentProgram = function(){
         let data = request.deleteStudentProgram();
-        data.then((element) => {result.getStudentPrograms()});        
+        data.then((element) => {window.location.reload()});        
     };
 
     result.selectTopProgram = function(){
@@ -114,13 +124,6 @@ function controller(baseURL){
     };
     return result;
 }
-
-let application = controller("http://localhost:65072");
-application.getStudentPrograms();
-//application.postStudentProgram(studentProgram(18,"equipoDeGente", "anda a buscarlo", false));
-//application.getStudentProgram(1);
-//application.deleteStudentProgram();
-//application.patchStudentProgram(3, studentProgram(3,"MODIFICADO", "anda a buscarlo", false));
 
 function studentProgram(id, teamName, src, isRunning){
     let result = {};
