@@ -31,7 +31,7 @@ function requestMaker(baseURL){
             request.open("POST", baseURL + "/api/StudentProgram/", true)
             request.setRequestHeader('Accept', 'application/json');
             request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-            let data = JSON.stringify({"id": studentProgram.id, "teamName": studentProgram.teamName, "src": studentProgram.src, "isRunning": studentProgram.isRunning});
+            let data = JSON.stringify({"id": parseInt(studentProgram.id), "teamName": studentProgram.teamName, "src": studentProgram.src, "isRunning": studentProgram.isRunning});
             request.send(data);
             request.addEventListener("load", ()=>{
                 resolve(data);
@@ -47,7 +47,7 @@ function requestMaker(baseURL){
             request.setRequestHeader("Content-Type", "application/json");
             request.setRequestHeader("Accept", "application/json");
 
-            let data = JSON.stringify({"id": studentProgram.id , "teamName": studentProgram.teamName, "src" : studentProgram.src, "isRunning" : studentProgram.isRunning});
+            let data = JSON.stringify({"id": parseInt(studentProgram.id), "teamName": studentProgram.teamName, "src" : studentProgram.src, "isRunning" : studentProgram.isRunning});
             request.send(data)
             request.addEventListener("load",()=>{
                 resolve(request.response);
