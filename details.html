@@ -14,45 +14,14 @@
     <link rel="stylesheet" href="libs/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <script src="libs/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
     <script src="js/requestmaker.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/mapper.js"></script>
+    <script src="js/controller.js"></script>
 
     <script>
-      const app = document.getElementById('details');
-      const container = document.createElement('div');
-      container.setAttribute('class', 'card-container container-fluid');
-      let row = document.createElement('div');
-      row.className = "row no-gutters";
-      app.appendChild(container);
-      container.appendChild(row);
-
-      var queryString = decodeURIComponent(window.location.search);
-      queryString = queryString.substring(4);
-      let application = controller("http://localhost:65072");
-      let data = application.getStudentProgram(queryString);
-      data.then((element)=>{
-          const card = document.createElement('div');
-          card.setAttribute('class', 'card');    
-          const h1 = document.createElement('h1');
-          h1.textContent = element.teamName;
-          const p = document.createElement('p');
-          p.textContent = element.id;
-          const p2 = document.createElement('p');
-          p2.textContent = element.isRunning;
-          const p3 = document.createElement('p');
-          p3.textContent = element.src;
-          const buttonReturn = document.createElement('a');
-                buttonReturn.className = "btn btn-primary";
-                buttonReturn.textContent = "Return to Menu";
-                buttonReturn.addEventListener("click", function () {
-                    window.location.href = "index.html";
-                });
-          container.appendChild(card);
-          card.appendChild(h1);
-          card.appendChild(p);
-          card.appendChild(p2);
-          card.appendChild(p3);
-          card.appendChild(buttonReturn);      
-        });          
+        var queryString = decodeURIComponent(window.location.search);
+        queryString = queryString.substring(4);
+        let application = controller("http://localhost:65072");
+        application.getStudentProgram(queryString);
     </script>
   </body>
 </html>

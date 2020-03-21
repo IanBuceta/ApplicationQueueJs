@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="libs/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <script src="libs/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
     <script src="js/requestmaker.js"></script>
-    <script src="js/scripts.js"></script>
-    
+    <script src="js/mapper.js"></script>
+    <script src="js/controller.js"></script>    
+
     <form>
       <div class="form-group">
         <label for="TeamName">Team Name</label>
@@ -29,18 +30,8 @@
         var queryString = decodeURIComponent(window.location.search);
         queryString = queryString.substring(4);
 
-        let application = controller("http://localhost:65072");
-        let data = application.getStudentProgram(queryString);
-        let program;
-        data.then((element)=>{
-          program = element
-          document.getElementById("TeamName").value = element.teamName;
-          document.getElementById("Src").value = element.src;
-        });
-
-        document.getElementById("submitButton").addEventListener("click", () => {
-        application.patchStudentProgram(queryString, studentProgram(program.id, document.getElementById("TeamName").value, document.getElementById("Src").value, program.isRunning));
-        });
+        let application = controller("http://localhost:65072");        
+        application.patchStudentProgram(queryString);             
       </script>
     </form>
   </body>

@@ -13,7 +13,10 @@
     <link rel="stylesheet" href="libs/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <script src="libs/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
     <script src="js/requestmaker.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/mapper.js"></script>
+    <script src="js/controller.js"></script>
+
+
     
     <form>
         <div class="form-group">
@@ -32,7 +35,7 @@
       <script>
         let application = controller("http://localhost:65072");
         document.getElementById("submitButton").addEventListener("click", () => {
-        application.postStudentProgram(studentProgram(document.getElementById("Id").value, document.getElementById("TeamName").value, document.getElementById("Src").value, false));
+        application.postStudentProgram(document.getElementById("Id").value, document.getElementById("TeamName").value, document.getElementById("Src").value, false);
         });
       </script>
     </form>
