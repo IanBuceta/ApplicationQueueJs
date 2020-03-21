@@ -48,7 +48,7 @@ function requestMaker(baseURL){
             request.setRequestHeader("Accept", "application/json");
 
             let data = JSON.stringify({"id": parseInt(studentProgram.id), "teamName": studentProgram.teamName, "src" : studentProgram.src, "isRunning" : studentProgram.isRunning});
-            request.send(data)
+            request.send(data);
             request.addEventListener("load",()=>{
                 resolve(request.response);
             });
@@ -56,11 +56,11 @@ function requestMaker(baseURL){
         
     };
     
-    result.deleteStudentProgram = function(){
+    result.deleteStudentProgram = function(id){
         return new Promise((resolve, reject)=>{
             let request = new XMLHttpRequest();
-            request.open("DELETE", baseURL + "/api/StudentProgram/", true);
-            request.send(null);
+            request.open("DELETE", baseURL + "/api/StudentProgram/" + id, true);
+            request.send();
             request.addEventListener("load", ()=>{
                 resolve(request.response);
             }); 
