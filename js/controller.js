@@ -8,12 +8,11 @@ function controller(baseURL){
         const container = document.createElement('div');
         container.setAttribute('class', 'card-container container-fluid');
         let row = document.createElement('div');
-        row.className = "row no-gutters";
+        row.className = "row";
         app.appendChild(container);
         container.appendChild(row);
   
         let data = objectMapper.getStudentPrograms();
-        let i = 0;
   
         const buttonEnqueue = document.createElement('a');
         buttonEnqueue.className = "btn btn-warning";
@@ -27,17 +26,17 @@ function controller(baseURL){
         data.then((res)=>{
             res.forEach(element => {
                 const column = document.createElement('div');
-                column.className = "col col-sm-3 mb-3";
+                column.className = "col col-sm-3 mb-5";
                 const card = document.createElement('div');
-                card.setAttribute('class', 'card'); 
+                card.setAttribute('class', 'card h-100'); 
                 const body = document.createElement('body');
                 body.className = "card-body";
   
-                const h4 = document.createElement('h3');
-                h4.textContent = "Team Name:";
-                const h5 = document.createElement('h1');
-                h5.textContent = element.teamName;
-                h5.className = "card-title";
+                const h3 = document.createElement('h3');
+                h3.textContent = "Team Name:";
+                const h1 = document.createElement('h1');
+                h1.textContent = element.teamName;
+                h1.className = "card-title";
                 
       
                 const p = document.createElement('p');
@@ -45,7 +44,7 @@ function controller(baseURL){
                 p.className = "card-text";
                   
                 const buttonGroup = document.createElement('div');
-                buttonGroup.className = 'btn-group';
+                buttonGroup.className = 'card-footer';
                 const buttonEdit = document.createElement('a');
                 buttonEdit.className = "btn btn-primary";
                 buttonEdit.textContent = "Edit";
@@ -72,21 +71,15 @@ function controller(baseURL){
                 row.appendChild(column);
                 column.appendChild(card);
                 card.appendChild(body);
-                card.appendChild(h4);
-                card.appendChild(h5);
+                card.appendChild(h3);
+                card.appendChild(h1);
                 card.appendChild(p);
                   
                 card.appendChild(buttonGroup);
                 buttonGroup.appendChild(buttonEdit);
                 buttonGroup.appendChild(buttonInfo);
                 buttonGroup.appendChild(buttonDelete);
-                i++;
-                if(i == 4){
-                    const w = document.createElement('div');
-                    w.className = "w-100";
-                    row.appendChild(w);
-                    i = 0;
-                }                
+                              
             });
         });  
     };
